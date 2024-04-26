@@ -1,12 +1,18 @@
 class Wallet:
-    payment_system = "Мой Кошелёк 1.0"
-
+    paymentsystem = "Мой Кошелёк 1.0"
     def __init__(self, name: str, rub: str):
         self.name = name
         if rub not in ["RUB"]:
             raise ValueError("Доступна только валюта RUB")
         self.rub = rub
         self.balance = 0
+
+    def balance_view(self):
+        print("Баланс: {} {}".format(self.balance, self.rub))
+
+    def delete(self):
+        print("Кошелёк {} закрыт!".format(self.name))
+        del self
 
     def deposit(self, amount: float):
         if amount <= 0:
@@ -25,29 +31,22 @@ class Wallet:
         else:
             print("Недостаточно средств. Пополните баланс!")
 
-    def balance_view(self):
-        print("Баланс: {} {}".format(self.balance, self.rub))
-
-    def delete(self):
-        print("Кошелёк {} закрыт!".format(self.name))
-        del self
-
 try:
-    Mywallet = Wallet("Мой кошелек 1.0", "RUB")
-    print(Mywallet.payment_system)
+    wallet = Wallet("Мой кошелек 1.0", "RUB")
+    print(wallet.paymentsystem)
     print("")
-    Mywallet.balance_view()
+    wallet.balance_view()
     print("")
-    Mywallet.deposit(100)
+    wallet.deposit(100)
     print("")
-    Mywallet.withdrawal(120)
+    wallet.withdrawal(120)
     print("")
-    Mywallet.deposit(50)
+    wallet.deposit(50)
     print("")
-    Mywallet.withdrawal(120)
+    wallet.withdrawal(120)
     print("")
-    Mywallet.balance_view()
+    wallet.balance_view()
     print("")
-    Mywallet.delete()
+    wallet.delete()
 except ValueError as error:
     print(error)
