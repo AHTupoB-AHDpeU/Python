@@ -23,18 +23,17 @@ class Wallet:
 
         print("Кошелёк пополнен на {} {}.".format(amount, self.rub))
         print(f"Кошелёк пополнен на {amount} {self.rub}.(f-string)")  # реализации f-string
+        self.balance_view()
 
     def withdrawal(self, amount: float):
-        if amount <= 0:
-            raise ValueError("Введите положительное число")
-        if self.balance >= amount:
-            self.balance -= amount
-
-            print("Списано {} {}.".format(amount, self.rub))
-            print(f"Списано {amount} {self.rub}.(f-string)")  # реализации f-string
-
-        else:
+        while self.balance < amount:
             print("Недостаточно средств. Пополните баланс!")
+            self.deposit(float(input("На какую сумму хотите пополнить: ")))
+
+        self.balance -= amount
+
+        print("Списано {} {}.".format(amount, self.rub))
+        print(f"Списано {amount} {self.rub}.(f-string)")  # реализации f-string
 
 try:
     wallet = Wallet("Мой кошелек 1.0", "RUB")
@@ -42,13 +41,7 @@ try:
     print("")
     wallet.balance_view()
     print("")
-    wallet.deposit(100)
-    print("")
-    wallet.withdrawal(120)
-    print("")
-    wallet.deposit(50)
-    print("")
-    wallet.withdrawal(120)
+    wallet.withdrawal(int(input("Цена товара: ")))
     print("")
     wallet.balance_view()
     print("")
