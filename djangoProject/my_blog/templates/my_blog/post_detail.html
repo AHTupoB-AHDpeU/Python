@@ -1,0 +1,22 @@
+{% extends 'my_blog/layout.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'my_blog/css/post_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="post_detail">
+        <div class="content">
+            <img src="{{post.image.url}}">
+            <div>
+                <a>{{post.content}}</a>
+                <div class="post_info">
+                    <a>{{post.author}}</a>
+                    <a>{{post.date_published}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
